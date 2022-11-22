@@ -1,3 +1,15 @@
+# Descartes Underwriting - Technical test
+
+This project contains a base template using ReactJS that can be used for Descartes Underwriting technical test.
+
+To install and run this template, use
+```bash
+npm install
+npm start
+```
+
+# Instructions
+
 ## Submission
 
 The solution to this test (source and test codes) should be saved on a private `descartes-app` repository on your github account.
@@ -33,3 +45,8 @@ The project should contain:
 
 Anything that is not listed in the task section does not have to be developed.
 No need to bother with access management, signing etc.
+
+
+---
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

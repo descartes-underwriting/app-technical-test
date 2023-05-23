@@ -18,7 +18,8 @@ Access should be granted to:
 
 * <https://github.com/alexandreCameron>
 * <https://github.com/f-combes>
-* <https://github.com/bpeyrouBDHIS>
+* <https://github.com/achilleas-michos>
+* <https://github.com/michelclet>
 
 ## Duration
 

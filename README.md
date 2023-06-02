@@ -1,8 +1,9 @@
 # Descartes Underwriting - Technical test
 
-This project contains a base template using ReactJS that can be used for Descartes Underwriting technical test.
+This project template using ReactJS & Python that can be used for Descartes Underwriting technical test.
 
 To install and run this template, use
+
 ```bash
 npm install
 npm start
@@ -16,10 +17,10 @@ The solution to this test (source and test codes) should be saved on a private `
 
 Access should be granted to:
 
-* <https://github.com/alexandreCameron>
-* <https://github.com/f-combes>
-* <https://github.com/achilleas-michos>
-* <https://github.com/michelclet>
+- [https://github.com/alexandreCameron](https://github.com/alexandreCameron)
+- [https://github.com/f-combes](https://github.com/f-combes)
+- [https://github.com/achilleas-michos](https://github.com/achilleas-michos)
+- [https://github.com/michelclet](https://github.com/michelclet)
 
 ## Duration
 
@@ -27,18 +28,24 @@ Preparing the test should take 3 to 5 hours.
 
 ## Task
 
-On a linux or docker environment, using a JS framework (React recommended) and a simple architecture create a form app.
+Create a simple 3-tier application to manage contacts.
 
-This form app should be able to:
+The application shoudl allow the user to:
 
-1. gather fields (eg: first name, last name, job, address, question)
-2. save them (with a button)
-3. produce a report of the information (on a separate page) 
-4. allow audit of all past forms
+1. List the existing contacts
+2. View the details of a contact
+3. Create a new contact (fields: first name, last name, job, address, question)
+
+Technology stack recomended:
+
+1. React for the frontend
+2. Python for the backend (e.g. fastapi, flask)
+3. Database (any type that can store this type of data)
+4. Docker files and docker compose
 
 The project should contain:
 
-1. `README.md` with the commands to install and run the app locally 	
+1. `README.md` with the commands to install and run the app locally
 2. A diagram of the architecture (component and interaction)
 3. A minimal CI/CD to check the code quality before integration on main branch
 
@@ -47,6 +54,7 @@ The project should contain:
 Anything that is not listed in the task section does not have to be developed.
 No need to bother with access management, signing etc.
 
+Testing should exist but remain minimal, just for demonstation purposes
 
 ---
 

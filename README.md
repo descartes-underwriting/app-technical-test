@@ -55,7 +55,3 @@ Anything that is not listed in the task section does not have to be developed.
 No need to bother with access management, signing etc.
 
 Testing should exist but remain minimal, just for demonstation purposes
-
----
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

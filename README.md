@@ -30,7 +30,7 @@ Preparing the test should take 3 to 5 hours.
 
 Create a simple 3-tier application to manage contacts.
 
-The application shoudl allow the user to:
+The application should allow the user to:
 
 1. List the existing contacts
 2. View the details of a contact

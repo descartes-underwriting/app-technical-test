@@ -54,4 +54,4 @@ The project should contain:
 Anything that is not listed in the task section does not have to be developed.
 No need to bother with access management, signing etc.
 
-Testing should exist but remain minimal, just for demonstation purposes
+Testing should exist but remain minimal, just for demonstration purposes.

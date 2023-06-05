@@ -36,7 +36,7 @@ The application should allow the user to:
 2. View the details of a contact
 3. Create a new contact (fields: first name, last name, job, address, question)
 
-Technology stack recomended:
+Technology stack recommended:
 
 1. React for the frontend
 2. Python for the backend (e.g. fastapi, flask)

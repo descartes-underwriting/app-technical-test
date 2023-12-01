@@ -21,17 +21,16 @@ The solution should include:
 
 - source code
 - test code
-- notebooks **with outputs**
 
 When the final version is ready:
 
 1. Send an email to the recruiter indicating that you finished the project and sharing the url of the project
 2. Grant access to:
 
-- <https://github.com/alexandreCameron>
-- <https://github.com/f-combes>
-- <https://github.com/achilleas-michos>
-- <https://github.com/michelclet>
+- [https://github.com/alexandreCameron](https://github.com/alexandreCameron)
+- [https://github.com/f-combes](https://github.com/f-combes)
+- [https://github.com/achilleas-michos](https://github.com/achilleas-michos)
+- [https://github.com/michelclet](https://github.com/michelclet)
 
 ## Duration
 

@@ -44,4 +44,4 @@ async def transactional_session() -> AsyncYieldFixture[AsyncSession]:
 
 @pytest.fixture(scope="function")
 async def db_session(transactional_session: AsyncSession) -> AsyncYieldFixture[AsyncSession]:
-    yield transactional_session
+    return transactional_session

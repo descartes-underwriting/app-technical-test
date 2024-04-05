@@ -3,6 +3,7 @@
 htmlcov
 .venv
 .vscode
+.idea
 *.py[co]
 *.egg
 *.egg-info

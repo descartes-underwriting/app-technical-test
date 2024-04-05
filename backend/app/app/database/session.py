@@ -2,7 +2,7 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from typing import Any
 
-from pydantic import PostgresDsn
+from pydantic_core import MultiHostUrl
 from sqlalchemy.ext.asyncio import (
     AsyncConnection,
     AsyncSession,
@@ -58,7 +58,7 @@ class DatabaseSessionManager:
 
 
 db_url = settings.SQLALCHEMY_DATABASE_URI
-if isinstance(db_url, PostgresDsn):
+if isinstance(db_url, MultiHostUrl):
     db_url = db_url.unicode_string()
 
 sessionmanager = DatabaseSessionManager(db_url, {"echo": settings.ECHO_SQL_QUERIES})

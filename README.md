@@ -43,9 +43,12 @@ Create a simple 3-tier application to manage contacts.
 
 The application should allow the user to:
 
-1. List the existing contacts
-2. View the details of a contact
-3. Create a new contact (fields: first name, last name, job, email address, comment)
+1. Create a new contact (fields: first name, last name, job, email address, comment)
+2. List the existing contacts
+3. View the details of a contact
+4. Edit a specific contact
+5. Filter contacts by job
+6. Delete a contact
 
 Technology stack recommended:
 
@@ -58,7 +61,6 @@ The project should contain:
 
 1. `README.md` with the commands to install and run the app locally
 2. A diagram of the architecture (component and interaction)
-3. A minimal CI/CD to check the code quality before integration on main branch
 
 ## Comment
 

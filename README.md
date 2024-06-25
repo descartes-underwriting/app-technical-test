@@ -47,7 +47,7 @@ The application should allow the user to:
 2. List the existing contacts
 3. View the details of a contact
 4. Edit a specific contact
-5. Filter contacts by job
+5. Get all email address for a specific job
 6. Delete a contact
 
 Technology stack recommended:
@@ -68,3 +68,5 @@ Anything that is not listed in the task section does not have to be developed.
 No need to bother with access management, signing etc.
 
 Testing should exist but remain minimal, just for demonstration purposes.
+
+Keep in mind that we can have a lot of contacts

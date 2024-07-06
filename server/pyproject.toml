@@ -1,0 +1,38 @@
+[tool.ruff]
+
+# Maximum line length to 120 characters.
+line-length = 120
+# Support Python 3.11+.
+target-version = "py311"
+src = ["."]
+
+# Rules to apply
+select = [
+  "E",   # pycodestyle
+  "W",   # pycodestyle
+  "F",   # pyflakes
+  "UP",  # pyupgrade
+  "I",   # isort
+]
+
+# List what was automatically fixed
+show-fixes=true
+
+# Exclude a variety of commonly ignored directories
+exclude = [
+    "__pypackages__",
+    "Dockerfile*",
+    "makefile",
+    "deploy/*",
+    "migrations/*",
+    "requirements/*",
+    ".dockerignore",
+    ".env*",
+    ".git*",
+    ".pytest_cache",
+    ".ruff_cache",
+    "*.ini",
+    "*.md",
+    "*.pyc",
+    "*.yaml",
+]

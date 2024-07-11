@@ -49,10 +49,10 @@ The application should allow the user to:
 
 Technology stack recommended:
 
-1. React for the frontend
-2. Python for the backend (e.g. fastapi, flask)
-3. Database (any type that can store this type of data)
-4. Docker files and docker compose
+1. React for the frontend N/A
+2. Python for the backend (e.g. fastapi, flask) Fast
+3. Database (any type that can store this type of data) Mongo
+4. Docker files and docker compose 
 
 The project should contain:
 
@@ -66,3 +66,13 @@ Anything that is not listed in the task section does not have to be developed.
 No need to bother with access management, signing etc.
 
 Testing should exist but remain minimal, just for demonstration purposes.
+
+local Docker:
+docker-compose up --build --force-recreate
+
+local .venv:
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r server/requirements.txt
+fastapi dev server/api.py
+

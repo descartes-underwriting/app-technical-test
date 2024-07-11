@@ -2,3 +2,5 @@ fastapi
 pydantic
 pytest
 motor
+pytest-asyncio
+httpx

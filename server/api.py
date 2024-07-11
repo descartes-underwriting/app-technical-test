@@ -1,41 +1,96 @@
-import sys
-print(sys.path)
-from fastapi import FastAPI, HTTPException
-from server.models import Contact
-from server.database import contact_collection
+import sys, logging
+from fastapi import FastAPI, HTTPException, Query
+from server.models import Contact, ContactResponse
+from server.database import get_contacts, get_contact_by_details, get_contact_by_id, create_contact
+from server.mongo_database import clear_database
+
+# pour mieux faire il vaut mieux créer un logger et faire de l'injection avec la metthode de logging pour un déployment sur GCP for ex. 
+# sans doute comme j'ai fait pour mongo recup le niveau de log via le yaml/env...
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 app = FastAPI()
 
+#need CORS? SECURITY 
 
+#si dans un container ça peut être utile un health check
 @app.get("/")
 async def root():
+    logger.info(f"API Ready")
     return {"HEALTH": "OK"}
 
 
-@app.get("/contacts/", response_model=list[Contact])
-async def contactsList():
-    #surement call la db et retourner la liste ...hum prevoir un filtre et sort?
-    contacts = await contact_collection.find().to_list(length=100)
-    return [Contact(id=str(contact["_id"]), **contact) for contact in contacts]
-    # return []
+@app.get("/contacts/", response_model=list[ContactResponse])
+async def contactsList(limit: int = Query(10, gt=0), offset: int = Query(0, ge=0)):
+    logger.info(f"GET contacts called with limit={limit}, offset={offset}")
+    try:
+        contacts = await get_contacts(limit, offset)
+        # ne pas lister vu la taille pot.
+        logger.info("Contacts retrieved successfully")
+        return contacts
+    except Exception as e:
+        logger.error(f"Error retrieving contacts: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
-@app.get("/contact/{contact_id}", response_model=Contact)
-async def contactView(contact_id: str):
-    if contact_id is None:
-        raise HTTPException(status_code=404, detail="Invalid Id")
-    # utiliser id de la db ou ajouter au model...
-    contact = {"_id":"", "first_name": "Elpido", "last_name": "HOUNAKE", "job": "Dev", "email_address": "secret@something.com", "comment": "test" }
-    # si mongo il faudra separer et ajouter not JSON serializable blabla
-    return Contact(id=str(contact["_id"]), **contact)
 
-@app.post("/contact/", response_model=Contact)
+@app.get("/contact/", response_model=ContactResponse)
+async def contactView(first_name: str = None, last_name: str = None):
+    logger.info(f"GET contact called with first_name={first_name}, last_name={last_name}")
+    contact_info = {"first_name":first_name} if first_name else {}
+    if last_name:
+        contact_info["last_name"] = last_name
+    if not contact_info:
+        logger.error("Invalid request: both first_name and last_name are missing")
+        raise HTTPException(status_code=400, detail="Invalid Request")
+    # process request
+    try:
+        contacts = await get_contact_by_details(contact_info)
+        logger.info(f"Contact retrieved successfully: {contacts}")
+        return contacts
+    except HTTPException as e:
+         # je retrow l'erreur que j'ai raise dans la fonction fille
+        logger.error(f"Error retrieving contact: {e.detail}")
+        raise e
+    except Exception as e:
+        logger.error(f"Error retrieving contact: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+@app.get("/contact/id/{contact_id}", response_model=ContactResponse)
+async def contactViewbyId(id: str):
+    logger.info(f"GET contact called with contact_id={id}")
+    if not id:
+        logger.error("Invalid request: id is missing")
+        raise HTTPException(status_code=400, detail="Invalid Request")
+    # process request
+    try:
+        contact = await get_contact_by_id(id)
+        logger.info(f"Contact retrieved successfully: {contact}")
+        return contact
+    except HTTPException as e:
+        # same retrow
+        logger.error(f"Error retrieving contact: {e.detail}")
+        raise e
+    except Exception as e:
+        logger.error(f"Error retrieving contact: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+@app.post("/contact/", response_model=ContactResponse)
 async def contactCreate(contact: Contact):
+    logger.info(f"POST contact called with contact={contact}")
+    try:
+        new_contact = await create_contact(contact)
+        logger.info(f"Contact created successfully: {new_contact}")
+        return new_contact
+    except HTTPException as e:
+        logger.error(f"Error creating contact: {e.detail}")
+        raise e
+    except Exception as e:
+        logger.error(f"Error creating contact: {e}")
+        raise HTTPException(status_code=500, detail="Internal Server Error")
+
+#DELETE UPDATE?(since i dont do an upsert)
 
 
-    result = await contact_collection.insert_one(contact.dict())
-    new_contact = await contact_collection.find_one({"_id": result.inserted_id})
-    return Contact(id=str(new_contact["_id"]), **new_contact)
-    # demander si besoin de faire un model avec des required fields size limit etc...
-    # demander que faire pour les doublons, quel/quels sont les clés uniques, et si faire un upsert ou refuser la copie
-    new_contact = contact.__dict__.copy() # un shallow copy mais il faut mieux request pour get ce quon a inseré 100% sûr
-    # creer un modele de réponse ou renvoyer l'objet contact ou just un Ok?
-    return Contact(new_contact)
+# @app.on_event("startup")
+# async def startup_event():
+#     logger.info("Starting up and clearing the database...")
+#     await clear_database()

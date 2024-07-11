@@ -32,29 +32,31 @@ async def contactsList(limit: int = Query(10, gt=0), offset: int = Query(0, ge=0
         raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
-@app.get("/contact/", response_model=ContactResponse)
-async def contactView(first_name: str = None, last_name: str = None):
-    logger.info(f"GET contact called with first_name={first_name}, last_name={last_name}")
-    contact_info = {"first_name":first_name} if first_name else {}
-    if last_name:
-        contact_info["last_name"] = last_name
-    if not contact_info:
-        logger.error("Invalid request: both first_name and last_name are missing")
-        raise HTTPException(status_code=400, detail="Invalid Request")
-    # process request
-    try:
-        contacts = await get_contact_by_details(contact_info)
-        logger.info(f"Contact retrieved successfully: {contacts}")
-        return contacts
-    except HTTPException as e:
-         # je retrow l'erreur que j'ai raise dans la fonction fille
-        logger.error(f"Error retrieving contact: {e.detail}")
-        raise e
-    except Exception as e:
-        logger.error(f"Error retrieving contact: {e}")
-        raise HTTPException(status_code=500, detail="Internal Server Error")
+#commented because no one asked for this
+# @app.get("/contact/", response_model=ContactResponse)
+# async def contactView(first_name: str = None, last_name: str = None):
+#     logger.info(f"GET contact called with first_name={first_name}, last_name={last_name}")
+#     contact_info = {"first_name":first_name} if first_name else {}
+#     if last_name:
+#         contact_info["last_name"] = last_name
+#     if not contact_info:
+#         logger.error("Invalid request: both first_name and last_name are missing")
+#         raise HTTPException(status_code=400, detail="Invalid Request")
+#     # process request
+#     try:
+#         contacts = await get_contact_by_details(contact_info)
+#         logger.info(f"Contact retrieved successfully: {contacts}")
+#         return contacts
+#     except HTTPException as e:
+#          # je retrow l'erreur que j'ai raise dans la fonction fille
+#         logger.error(f"Error retrieving contact: {e.detail}")
+#         raise e
+#     except Exception as e:
+#         logger.error(f"Error retrieving contact: {e}")
+#         raise HTTPException(status_code=500, detail="Internal Server Error")
 
-@app.get("/contact/id/{contact_id}", response_model=ContactResponse)
+
+@app.get("/contact/{contact_id}", response_model=ContactResponse)
 async def contactViewbyId(id: str):
     logger.info(f"GET contact called with contact_id={id}")
     if not id:
@@ -86,10 +88,9 @@ async def contactCreate(contact: Contact):
     except Exception as e:
         logger.error(f"Error creating contact: {e}")
         raise HTTPException(status_code=500, detail="Internal Server Error")
-
 #DELETE UPDATE?(since i dont do an upsert)
 
-
+#if needed empty the database
 # @app.on_event("startup")
 # async def startup_event():
 #     logger.info("Starting up and clearing the database...")

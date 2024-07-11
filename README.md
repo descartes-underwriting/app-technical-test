@@ -70,6 +70,8 @@ Testing should exist but remain minimal, just for demonstration purposes.
 local Docker:
 docker-compose up --build --force-recreate
 
+local test
+
 local .venv:
 python3 -m venv .venv
 source .venv/bin/activate

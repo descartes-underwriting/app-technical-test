@@ -51,7 +51,7 @@ The application should allow the user to:
 5. Get all email address for a specific job
 6. Delete a contact
 
-Technology stack recommended:
+Technology stack required:
 
 1. React for the frontend
 2. Python for the backend (e.g. fastapi, flask)
@@ -70,4 +70,6 @@ No need to bother with access management, signing etc.
 
 Testing should exist but remain minimal, just for demonstration purposes.
 
+## Hint
 Keep in mind that we can have a lot of contacts
+Keep in mind that we can have a lot of concurrent users

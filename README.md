@@ -28,11 +28,11 @@ When the final version is ready:
 2. Grant access to:
 
 - [https://github.com/alexandreCameron](https://github.com/alexandreCameron)
-- [https://github.com/f-combes](https://github.com/f-combes)
 - [https://github.com/romain-gauvreau](https://github.com/romain-gauvreau)
 - [https://github.com/paultrh](https://github.com/paultrh)
 - [https://github.com/Kaleb0x](https://github.com/Kaleb0x)
 - [https://github.com/bebsworthy](https://github.com/bebsworthy)
+- [https://github.com/ericmitt](https://github.com/ericmitt)
 
 ## Duration
 
